@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Daiane Fabrícia! ❤️</title>
+    <meta name="description" content="Uma homenagem especial para os 38 anos da Daiane Fabrícia - Esposa, Mãe e Mulher Extraordinária.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" onclick="toggleMusic()" style="position: fixed; top: 20px; right: 20px; z-index: 10001; padding: 10px 20px; border-radius: 50px; border: none; background: var(--glass); backdrop-filter: blur(5px); color: var(--secondary); cursor: pointer; font-weight: 600; box-shadow: var(--shadow);">
+        🎵 Tocar Música
+    </button>
+    <div id="heart-container"></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="fade-in" onclick="alert('Você é o amor da minha vida! ❤️')">Daiane Fabrícia</h1>
+            <p class="subtitle fade-in-delay">38 Anos de uma História Linda</p>
+            <div class="scroll-indicator">
+                <span>Role para ver a homenagem</span>
+                <div class="arrow"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="message-section">
+        <div class="container">
+            <div class="message-card">
+                <span class="quote-icon">"</span>
+                <p class="main-message">
+                    Hoje o dia é todo seu, <strong>Daiane Fabrícia</strong>, mas o presente é meu por caminhar ao lado da melhor mulher do mundo. 
+                    Aos 38 anos, você irradia uma beleza que vem da sua força e do seu coração gigante. Eu te escolhi para ser a mãe da minha filha e, todos os dias, tenho a certeza de que fiz a melhor escolha da minha vida. 
+                    Ver a mãe maravilhosa e a esposa dedicada que você é me enche de orgulho. Que seu novo ciclo seja tão luminoso quanto o seu sorriso. 
+                    <br><br>
+                    <strong>Feliz aniversário, meu amor!</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Nossos Momentos</h2>
+            <div class="photo-grid">
+                <!-- Photos will be loaded here -->
+                <div class="photo-item"><img src="fotos/2.heic" alt="Momento 2"></div>
+                <div class="photo-item"><img src="fotos/3.heic" alt="Momento 3"></div>
+                <div class="photo-item"><img src="fotos/4.jpg" alt="Momento 4"></div>
+                <div class="photo-item"><img src="fotos/IMG_20251223_142722.jpg" alt="Momento 5"></div>
+                <div class="photo-item"><img src="fotos/IMG_20251224_212905_MFNR_HDR.jpg" alt="Momento 6"></div>
+                <div class="photo-item"><img src="fotos/IMG_20251226_183344_MFNR.jpg" alt="Momento 7"></div>
+                <div class="photo-item"><img src="fotos/IMG_20260103_110430_MFNR.jpg" alt="Momento 8"></div>
+                <div class="photo-item"><img src="fotos/IMG_20260301_171340_MFNR.jpg" alt="Momento 9"></div>
+                <div class="photo-item"><img src="fotos/IMG_20260426_184239_MFNR.jpg" alt="Momento 10"></div>
+                <div class="photo-item"><img src="fotos/FB_IMG_1725810079047.jpg" alt="Momento 11"></div>
+                <div class="photo-item"><img src="fotos/IMG-20210117-WA0058.jpg" alt="Momento 12"></div>
+                <div class="photo-item"><img src="fotos/IMG-20210124-WA0037.jpg" alt="Momento 13"></div>
+                <div class="photo-item"><img src="fotos/IMG_20191028_194314~2.jpg" alt="Momento 14"></div>
+                <div class="photo-item"><img src="fotos/IMG_20210119_101922.jpg" alt="Momento 15"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reasons-section">
+        <div class="container">
+            <h2 class="section-title">Motivos para Celebrar Você</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">🌟</div>
+                    <h3>Sua Luz</h3>
+                    <p>Como você ilumina qualquer ambiente com sua presença.</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">💖</div>
+                    <h3>Seu Cuidado</h3>
+                    <p>A forma como você cuida da nossa filha e da nossa casa.</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">💪</div>
+                    <h3>Sua Força</h3>
+                    <p>A mulher resiliente que nunca desiste dos seus sonhos.</p>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">😊</div>
+                    <h3>Seu Sorriso</h3>
+                    <p>O melhor som do mundo e nossa dose diária de alegria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="surprise-section">
+        <div class="container">
+            <h2 class="section-title">Sua Caixa de Surpresas</h2>
+            <p class="instruction">Toque nos presentes para revelar seus mimos especiais!</p>
+            <div class="surprise-grid">
+                <div class="surprise-card" onclick="revealSurprise(this, 'Jantar Romântico Especial 🍷')">
+                    <div class="card-front">🎁</div>
+                    <div class="card-back"></div>
+                </div>
+                <div class="surprise-card" onclick="revealSurprise(this, 'Um Dia de Spa & Relaxamento 💆‍♀️')">
+                    <div class="card-front">🎁</div>
+                    <div class="card-back"></div>
+                </div>
+                <div class="surprise-card" onclick="revealSurprise(this, 'Vale-Abraço Infinito & Beijos 💋')">
+                    <div class="card-front">🎁</div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-section">
+        <div class="container">
+            <h2 class="section-title">Deixe seu Carinho</h2>
+            <p class="instruction">Clique no botão abaixo para enviar uma chuva de corações e desejar parabéns!</p>
+            
+            <div class="action-buttons">
+                <button id="love-button" class="btn-primary">
+                    <span class="icon">❤️</span> Enviar Amor
+                </button>
+                <a href="https://wa.me/?text=Parabéns pelo seu dia, Daiane! 38 anos de uma mulher incrível. Desejo muita saúde e felicidades!" target="_blank" class="btn-secondary">
+                    <span class="icon">💬</span> Mandar WhatsApp
+                </a>
+            </div>
+
+            <div class="mural" id="mural">
+                <h3>Mural de Desejos</h3>
+                <div class="mural-form">
+                    <input type="text" id="visitor-name" placeholder="Seu Nome">
+                    <textarea id="visitor-message" placeholder="Deixe sua mensagem de parabéns..."></textarea>
+                    <button onclick="postMessage()" class="btn-primary" style="width: 100%; margin-top: 10px;">Postar no Mural</button>
+                </div>
+                <div class="mural-content">
+                    <!-- Messages will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Feito com amor para Daiane Fabrícia &bull; 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
