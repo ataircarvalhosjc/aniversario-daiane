@@ -200,6 +200,22 @@ document.addEventListener('mousemove', (e) => {
     setTimeout(() => star.remove(), 1000);
 });
 
+// PIX Copy Logic
+function copyPix() {
+    const key = '(12) 98869-9057';
+    navigator.clipboard.writeText(key).then(() => {
+        const btn = document.querySelector('.pix-copy-btn');
+        btn.textContent = '✅ Copiado!';
+        btn.style.background = '#28a745';
+        setTimeout(() => {
+            btn.textContent = '📋 Copiar';
+            btn.style.background = '';
+        }, 2500);
+    }).catch(() => {
+        alert('Chave PIX: ' + key);
+    });
+}
+
 // Music Toggle Logic
 function toggleMusic() {
     const audio = document.getElementById('bg-music');
