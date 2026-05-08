@@ -39,7 +39,7 @@ h1, h2, h3 {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('fotos/1.heic');
+                url('fotos/1.jpg.heic');
     background-size: cover;
     background-position: center;
     display: flex;
