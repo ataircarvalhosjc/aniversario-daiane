@@ -44,14 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.createHeartGlobally = createHeart;
 
-    // Message Wall Logic
-    function loadMessages() {
-        const savedMessages = JSON.parse(localStorage.getItem('daiane_messages') || '[]');
-        muralContent.innerHTML = '';
-        savedMessages.forEach(msg => {
-            renderMessage(msg.name, msg.text, msg.time);
-        });
-    }
+    // Supabase setup
+    const SUPABASE_URL = 'https://mehzgdagamchytjethkr.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1laHpnZGFnYW1jaHl0amV0aGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2NjI1MDMsImV4cCI6MjA4ODIzODUwM30.VC29X1NtHIlsl3Fq3M4ZDzTX1KCIHPZKdO4KhrjaXp8';
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     function renderMessage(name, text, time) {
         const messageDiv = document.createElement('div');
@@ -64,38 +60,56 @@ document.addEventListener('DOMContentLoaded', () => {
         muralContent.prepend(messageDiv);
     }
 
-    window.postMessage = function() {
+    async function loadMessages() {
+        muralContent.innerHTML = '<p style="color:var(--text-muted);text-align:center">Carregando mensagens... 💌</p>';
+        const { data, error } = await db
+            .from('mensagens_daiane')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(50);
+
+        muralContent.innerHTML = '';
+        if (error) { console.error(error); return; }
+        data.forEach(msg => {
+            const time = new Date(msg.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            renderMessage(msg.nome, msg.texto, time);
+        });
+    }
+
+    // Real-time: new messages appear instantly for everyone
+    db.channel('mural')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensagens_daiane' }, payload => {
+            const msg = payload.new;
+            const time = new Date(msg.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            renderMessage(msg.nome, msg.texto, time);
+            for (let i = 0; i < 8; i++) setTimeout(createHeart, i * 100);
+        })
+        .subscribe();
+
+    window.postMessage = async function() {
         const nameInput = document.getElementById('visitor-name');
         const messageInput = document.getElementById('visitor-message');
-        
-        if (!nameInput.value || !messageInput.value) {
+
+        if (!nameInput.value.trim() || !messageInput.value.trim()) {
             alert("Por favor, preencha seu nome e a mensagem! ❤️");
             return;
         }
 
-        const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-        const newMsg = {
-            name: nameInput.value,
-            text: messageInput.value,
-            time: now
-        };
+        const { error } = await db.from('mensagens_daiane').insert({
+            nome: nameInput.value.trim(),
+            texto: messageInput.value.trim()
+        });
 
-        // Save to local storage
-        const savedMessages = JSON.parse(localStorage.getItem('daiane_messages') || '[]');
-        savedMessages.push(newMsg);
-        localStorage.setItem('daiane_messages', JSON.stringify(savedMessages));
+        if (error) {
+            alert("Erro ao postar mensagem. Tente novamente!");
+            console.error(error);
+            return;
+        }
 
-        // Render immediately
-        renderMessage(newMsg.name, newMsg.text, newMsg.time);
-
-        // Clear inputs
         nameInput.value = '';
         messageInput.value = '';
 
-        // Heart burst
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createHeart, i * 100);
-        }
+        for (let i = 0; i < 10; i++) setTimeout(createHeart, i * 100);
     }
 
     loadMessages();
