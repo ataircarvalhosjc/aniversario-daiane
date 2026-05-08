@@ -138,6 +138,27 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(createHeart, i * 150);
         }
     }, 1000);
+
+    // Autoplay Music Logic
+    const audio = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+
+    function startMusic() {
+        audio.play().then(() => {
+            musicBtn.innerHTML = '🎵 Pausar Música';
+            document.removeEventListener('click', startMusic);
+            document.removeEventListener('touchstart', startMusic);
+        }).catch(error => {
+            console.log("Autoplay bloqueado pelo navegador. Aguardando interação.");
+        });
+    }
+
+    // Tenta tocar no primeiro clique ou toque na tela
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+    
+    // Também tenta tocar logo no início
+    startMusic();
 });
 
 function revealSurprise(element, message) {
