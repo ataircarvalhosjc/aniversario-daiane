@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (error) { console.error(error); return; }
         data.forEach(msg => {
             const time = new Date(msg.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            renderMessage(msg.nome, msg.texto, time);
+            renderMessage(msg.nome, msg.mensagem || msg.texto, time);
         });
     }
 
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'mensagens_daiane' }, payload => {
             const msg = payload.new;
             const time = new Date(msg.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            renderMessage(msg.nome, msg.texto, time);
+            renderMessage(msg.nome, msg.mensagem || msg.texto, time);
             for (let i = 0; i < 8; i++) setTimeout(createHeart, i * 100);
         })
         .subscribe();
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const { error } = await db.from('mensagens_daiane').insert({
             nome: nameInput.value.trim(),
-            texto: messageInput.value.trim()
+            mensagem: messageInput.value.trim()
         });
 
         if (error) {
